@@ -16,6 +16,8 @@ the Journal of Statistics Education dataset archive page. It is
 a salary survey of college professors conducted by the American
 Association of University Professors (AAUP).
 
+Here's a description of the structure of the data set.
+
 VARIABLE DESCRIPTIONS (AAUP2.DAT)
 
 Fixed column format with two data lines per school
@@ -60,7 +62,7 @@ Line #2
 
 ```{r import-from-web}
 help("read.fwf")
-ends_line1 <- c(5, 37, 39, 43, 48, 52, 56, 60, 65, 69, 73, 78)
+ends_line1 <- c(5, 6, 37, 39, 43, 48, 52, 56, 60, 65, 69, 73, 78)
 ends_line2 <- c(4, 8, 12, 16, 21)
 widths_line1 <- diff(c(0,ends_line1))
 widths_line2 <- diff(c(0,ends_line2))
@@ -69,4 +71,16 @@ aaup <- read.fwf(fn, c(widths_line1,widths_line2), stringsAsFactors=FALSE)
 head(aaup)
 str(aaup)
 ```
+
+Notice that some of the variables that look like they should be numeric
+are actually stored as character. Usually this is caused by a few stray
+values which are not numeric. Here's a quick way to list the 
+non-numeric varialbes.
+
+```{r list_non-numeric_values}
+non_numeric_list <- which(is.na(as.numeric(aaup$V6)))
+table(aaup$V5[non_numeric_list])
+```
+
+The non-numeric code in this variable is probably a missing value code.
 
