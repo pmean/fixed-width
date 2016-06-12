@@ -91,56 +91,171 @@ img {
 <p>9 - 12 Number of assistant professors</p>
 <p>13 - 16 Number of instructors</p>
 <p>17 - 21 Number of faculty - all ranks</p>
-<pre class="r"><code>help(&quot;read.fwf&quot;)</code></pre>
-<pre><code>## starting httpd help server ... done</code></pre>
-<pre class="r"><code>ends_line1 &lt;- c(5, 37, 39, 43, 48, 52, 56, 60, 65, 69, 73, 78)
+<pre class="r"><code>ends_line1 &lt;- c(5, 6, 37, 39, 43, 48, 52, 56, 60, 65, 69, 73, 78)
 ends_line2 &lt;- c(4, 8, 12, 16, 21)
 widths_line1 &lt;- diff(c(0,ends_line1))
 widths_line2 &lt;- diff(c(0,ends_line2))
 fn &lt;- &quot;http://www.amstat.org/publications/jse/datasets/aaup2.dat.txt&quot;
 aaup &lt;- read.fwf(fn, c(widths_line1,widths_line2), stringsAsFactors=FALSE)
 head(aaup)</code></pre>
-<pre><code>##      V1                               V2 V3   V4    V5   V6   V7  V8    V9
-## 1  1061  Alaska Pacific University       AK  IIB   454  382  362 382   567
-## 2  1063  Univ.Alaska-Fairbanks           AK  I     686  560  432 508   914
-## 3  1065  Univ.Alaska-Southeast           AK  IIA   533  494  329 415   716
-## 4 11462  Univ.Alaska-Anchorage           AK  IIA   612  507  414 498   825
-## 5  1002  Alabama Agri.&amp;Mech. Univ.       AL  IIA   442  369  310 350   530
-## 6  1004  University of Montevallo        AL  IIA   441  385  310 388   542
-##    V10  V11 V12 V13 V14 V15 V16 V17
-## 1  485  471 487   6  11   9   4  32
-## 2  753  572 677  74 125 118  40 404
-## 3  663  442 559   9  26  20   9  70
-## 4  681  557 670 115 124 101  21 392
-## 5  444  376 423  59  77 102  24 262
-## 6  473  383 477  57  33  35   2 127</code></pre>
+<pre><code>##      V1 V2                              V3 V4   V5    V6   V7   V8  V9
+## 1  1061 NA Alaska Pacific University       AK  IIB   454  382  362 382
+## 2  1063 NA Univ.Alaska-Fairbanks           AK  I     686  560  432 508
+## 3  1065 NA Univ.Alaska-Southeast           AK  IIA   533  494  329 415
+## 4 11462 NA Univ.Alaska-Anchorage           AK  IIA   612  507  414 498
+## 5  1002 NA Alabama Agri.&amp;Mech. Univ.       AL  IIA   442  369  310 350
+## 6  1004 NA University of Montevallo        AL  IIA   441  385  310 388
+##     V10  V11  V12 V13 V14 V15 V16 V17 V18
+## 1   567  485  471 487   6  11   9   4  32
+## 2   914  753  572 677  74 125 118  40 404
+## 3   716  663  442 559   9  26  20   9  70
+## 4   825  681  557 670 115 124 101  21 392
+## 5   530  444  376 423  59  77 102  24 262
+## 6   542  473  383 477  57  33  35   2 127</code></pre>
 <pre class="r"><code>str(aaup)</code></pre>
-<pre><code>## 'data.frame':    1161 obs. of  17 variables:
+<pre><code>## 'data.frame':    1161 obs. of  18 variables:
 ##  $ V1 : int  1061 1063 1065 11462 1002 1004 1008 1009 1012 1016 ...
-##  $ V2 : chr  &quot; Alaska Pacific University      &quot; &quot; Univ.Alaska-Fairbanks          &quot; &quot; Univ.Alaska-Southeast          &quot; &quot; Univ.Alaska-Anchorage          &quot; ...
-##  $ V3 : chr  &quot;AK&quot; &quot;AK&quot; &quot;AK&quot; &quot;AK&quot; ...
-##  $ V4 : chr  &quot; IIB&quot; &quot; I  &quot; &quot; IIA&quot; &quot; IIA&quot; ...
-##  $ V5 : chr  &quot;  454&quot; &quot;  686&quot; &quot;  533&quot; &quot;  612&quot; ...
-##  $ V6 : chr  &quot; 382&quot; &quot; 560&quot; &quot; 494&quot; &quot; 507&quot; ...
-##  $ V7 : chr  &quot; 362&quot; &quot; 432&quot; &quot; 329&quot; &quot; 414&quot; ...
-##  $ V8 : int  382 508 415 498 350 388 396 455 401 411 ...
-##  $ V9 : chr  &quot;  567&quot; &quot;  914&quot; &quot;  716&quot; &quot;  825&quot; ...
-##  $ V10: chr  &quot; 485&quot; &quot; 753&quot; &quot; 663&quot; &quot; 681&quot; ...
-##  $ V11: chr  &quot; 471&quot; &quot; 572&quot; &quot; 442&quot; &quot; 557&quot; ...
-##  $ V12: int  487 677 559 670 423 477 478 546 523 503 ...
-##  $ V13: int  6 74 9 115 59 57 20 366 34 67 ...
-##  $ V14: int  11 125 26 124 77 33 18 354 25 40 ...
-##  $ V15: int  9 118 20 101 102 35 30 301 27 66 ...
-##  $ V16: int  4 40 9 21 24 2 0 66 3 27 ...
-##  $ V17: int  32 404 70 392 262 127 68 1109 89 200 ...</code></pre>
+##  $ V2 : logi  NA NA NA NA NA NA ...
+##  $ V3 : chr  &quot;Alaska Pacific University      &quot; &quot;Univ.Alaska-Fairbanks          &quot; &quot;Univ.Alaska-Southeast          &quot; &quot;Univ.Alaska-Anchorage          &quot; ...
+##  $ V4 : chr  &quot;AK&quot; &quot;AK&quot; &quot;AK&quot; &quot;AK&quot; ...
+##  $ V5 : chr  &quot; IIB&quot; &quot; I  &quot; &quot; IIA&quot; &quot; IIA&quot; ...
+##  $ V6 : chr  &quot;  454&quot; &quot;  686&quot; &quot;  533&quot; &quot;  612&quot; ...
+##  $ V7 : chr  &quot; 382&quot; &quot; 560&quot; &quot; 494&quot; &quot; 507&quot; ...
+##  $ V8 : chr  &quot; 362&quot; &quot; 432&quot; &quot; 329&quot; &quot; 414&quot; ...
+##  $ V9 : int  382 508 415 498 350 388 396 455 401 411 ...
+##  $ V10: chr  &quot;  567&quot; &quot;  914&quot; &quot;  716&quot; &quot;  825&quot; ...
+##  $ V11: chr  &quot; 485&quot; &quot; 753&quot; &quot; 663&quot; &quot; 681&quot; ...
+##  $ V12: chr  &quot; 471&quot; &quot; 572&quot; &quot; 442&quot; &quot; 557&quot; ...
+##  $ V13: int  487 677 559 670 423 477 478 546 523 503 ...
+##  $ V14: int  6 74 9 115 59 57 20 366 34 67 ...
+##  $ V15: int  11 125 26 124 77 33 18 354 25 40 ...
+##  $ V16: int  9 118 20 101 102 35 30 301 27 66 ...
+##  $ V17: int  4 40 9 21 24 2 0 66 3 27 ...
+##  $ V18: int  32 404 70 392 262 127 68 1109 89 200 ...</code></pre>
+<pre class="r"><code>summary(aaup)</code></pre>
+<pre><code>##        V1           V2               V3                 V4           
+##  Min.   : 1002   Mode:logical   Length:1161        Length:1161       
+##  1st Qu.: 1903   NA's:1161      Class :character   Class :character  
+##  Median : 2668                  Mode  :character   Mode  :character  
+##  Mean   : 3052                                                       
+##  3rd Qu.: 3420                                                       
+##  Max.   :29269                                                       
+##       V5                 V6                 V7           
+##  Length:1161        Length:1161        Length:1161       
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##                                                          
+##                                                          
+##                                                          
+##       V8                  V9            V10                V11           
+##  Length:1161        Min.   :232.0   Length:1161        Length:1161       
+##  Class :character   1st Qu.:352.0   Class :character   Class :character  
+##  Mode  :character   Median :407.0   Mode  :character   Mode  :character  
+##                     Mean   :420.4                                        
+##                     3rd Qu.:475.0                                        
+##                     Max.   :866.0                                        
+##      V12                 V13              V14             V15        
+##  Length:1161        Min.   : 265.0   Min.   :  0.0   Min.   :  0.00  
+##  Class :character   1st Qu.: 436.0   1st Qu.: 18.0   1st Qu.: 19.00  
+##  Mode  :character   Median : 510.0   Median : 40.0   Median : 38.00  
+##                     Mean   : 526.7   Mean   : 95.1   Mean   : 72.39  
+##                     3rd Qu.: 600.0   3rd Qu.:105.0   3rd Qu.: 89.00  
+##                     Max.   :1075.0   Max.   :997.0   Max.   :721.00  
+##       V16              V17              V18        
+##  Min.   :  0.00   Min.   :  0.00   Min.   :   7.0  
+##  1st Qu.: 21.00   1st Qu.:  2.00   1st Qu.:  68.0  
+##  Median : 40.00   Median :  6.00   Median : 132.0  
+##  Mean   : 68.63   Mean   : 12.74   Mean   : 257.4  
+##  3rd Qu.: 92.00   3rd Qu.: 14.00   3rd Qu.: 323.0  
+##  Max.   :510.00   Max.   :178.00   Max.   :2261.0</code></pre>
 <p>Notice that some of the variables that look like they should be numeric are actually stored as character. Usually this is caused by a few stray values which are not numeric. Here’s a quick way to list the non-numeric varialbes.</p>
-<pre class="r"><code>non_numeric_list &lt;- which(is.na(as.numeric(aaup$V5)))</code></pre>
-<pre><code>## Warning in which(is.na(as.numeric(aaup$V5))): NAs introduced by coercion</code></pre>
+<pre class="r"><code>non_numeric_list &lt;- which(is.na(as.numeric(aaup$V6)))</code></pre>
+<pre><code>## Warning in which(is.na(as.numeric(aaup$V6))): NAs introduced by coercion</code></pre>
 <pre class="r"><code>table(aaup$V5[non_numeric_list])</code></pre>
 <pre><code>## 
-##     * 
-##    68</code></pre>
-<p>The non-numeric codes in this variable are probably a missing value code.</p>
+##  IIA  IIB 
+##    3   65</code></pre>
+<p>The non-numeric code in this variable is probably a missing value code.</p>
+<pre class="r"><code>column_type &lt;- c(&quot;numeric&quot;, rep(&quot;character&quot;,4),rep(&quot;numeric&quot;,13))
+aaup &lt;- read.fwf(fn, c(widths_line1,widths_line2), 
+                 stringsAsFactors=FALSE, na.strings=&quot;*&quot;,
+                 colClasses=column_type)
+head(aaup)</code></pre>
+<pre><code>##      V1 V2                              V3 V4   V5  V6  V7  V8  V9 V10 V11
+## 1  1061    Alaska Pacific University       AK  IIB 454 382 362 382 567 485
+## 2  1063    Univ.Alaska-Fairbanks           AK  I   686 560 432 508 914 753
+## 3  1065    Univ.Alaska-Southeast           AK  IIA 533 494 329 415 716 663
+## 4 11462    Univ.Alaska-Anchorage           AK  IIA 612 507 414 498 825 681
+## 5  1002    Alabama Agri.&amp;Mech. Univ.       AL  IIA 442 369 310 350 530 444
+## 6  1004    University of Montevallo        AL  IIA 441 385 310 388 542 473
+##   V12 V13 V14 V15 V16 V17 V18
+## 1 471 487   6  11   9   4  32
+## 2 572 677  74 125 118  40 404
+## 3 442 559   9  26  20   9  70
+## 4 557 670 115 124 101  21 392
+## 5 376 423  59  77 102  24 262
+## 6 383 477  57  33  35   2 127</code></pre>
+<pre class="r"><code>str(aaup)</code></pre>
+<pre><code>## 'data.frame':    1161 obs. of  18 variables:
+##  $ V1 : num  1061 1063 1065 11462 1002 ...
+##  $ V2 : chr  &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; ...
+##  $ V3 : chr  &quot;Alaska Pacific University      &quot; &quot;Univ.Alaska-Fairbanks          &quot; &quot;Univ.Alaska-Southeast          &quot; &quot;Univ.Alaska-Anchorage          &quot; ...
+##  $ V4 : chr  &quot;AK&quot; &quot;AK&quot; &quot;AK&quot; &quot;AK&quot; ...
+##  $ V5 : chr  &quot; IIB&quot; &quot; I  &quot; &quot; IIA&quot; &quot; IIA&quot; ...
+##  $ V6 : num  454 686 533 612 442 441 466 580 498 506 ...
+##  $ V7 : num  382 560 494 507 369 385 394 437 379 412 ...
+##  $ V8 : num  362 432 329 414 310 310 351 374 322 359 ...
+##  $ V9 : num  382 508 415 498 350 388 396 455 401 411 ...
+##  $ V10: num  567 914 716 825 530 542 558 692 655 607 ...
+##  $ V11: num  485 753 663 681 444 473 476 527 501 508 ...
+##  $ V12: num  471 572 442 557 376 383 427 451 404 445 ...
+##  $ V13: num  487 677 559 670 423 477 478 546 523 503 ...
+##  $ V14: num  6 74 9 115 59 57 20 366 34 67 ...
+##  $ V15: num  11 125 26 124 77 33 18 354 25 40 ...
+##  $ V16: num  9 118 20 101 102 35 30 301 27 66 ...
+##  $ V17: num  4 40 9 21 24 2 0 66 3 27 ...
+##  $ V18: num  32 404 70 392 262 ...</code></pre>
+<pre class="r"><code>summary(aaup)</code></pre>
+<pre><code>##        V1             V2                 V3                 V4           
+##  Min.   : 1002   Length:1161        Length:1161        Length:1161       
+##  1st Qu.: 1903   Class :character   Class :character   Class :character  
+##  Median : 2668   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   : 3052                                                           
+##  3rd Qu.: 3420                                                           
+##  Max.   :29269                                                           
+##                                                                          
+##       V5                  V6               V7              V8       
+##  Length:1161        Min.   : 270.0   Min.   :234.0   Min.   :199.0  
+##  Class :character   1st Qu.: 440.0   1st Qu.:367.0   1st Qu.:313.0  
+##  Mode  :character   Median : 506.0   Median :413.0   Median :349.0  
+##                     Mean   : 524.1   Mean   :416.4   Mean   :351.9  
+##                     3rd Qu.: 600.0   3rd Qu.:461.0   3rd Qu.:388.0  
+##                     Max.   :1009.0   Max.   :733.0   Max.   :576.0  
+##                     NA's   :68       NA's   :36      NA's   :24     
+##        V9             V10              V11             V12       
+##  Min.   :232.0   Min.   : 319.0   Min.   :292.0   Min.   :246.0  
+##  1st Qu.:352.0   1st Qu.: 547.0   1st Qu.:456.0   1st Qu.:389.0  
+##  Median :407.0   Median : 635.0   Median :519.0   Median :437.0  
+##  Mean   :420.4   Mean   : 653.5   Mean   :523.8   Mean   :442.1  
+##  3rd Qu.:475.0   3rd Qu.: 753.0   3rd Qu.:583.0   3rd Qu.:493.0  
+##  Max.   :866.0   Max.   :1236.0   Max.   :909.0   Max.   :717.0  
+##                  NA's   :68       NA's   :36      NA's   :24     
+##       V13              V14             V15              V16        
+##  Min.   : 265.0   Min.   :  0.0   Min.   :  0.00   Min.   :  0.00  
+##  1st Qu.: 436.0   1st Qu.: 18.0   1st Qu.: 19.00   1st Qu.: 21.00  
+##  Median : 510.0   Median : 40.0   Median : 38.00   Median : 40.00  
+##  Mean   : 526.7   Mean   : 95.1   Mean   : 72.39   Mean   : 68.63  
+##  3rd Qu.: 600.0   3rd Qu.:105.0   3rd Qu.: 89.00   3rd Qu.: 92.00  
+##  Max.   :1075.0   Max.   :997.0   Max.   :721.00   Max.   :510.00  
+##                                                                    
+##       V17              V18        
+##  Min.   :  0.00   Min.   :   7.0  
+##  1st Qu.:  2.00   1st Qu.:  68.0  
+##  Median :  6.00   Median : 132.0  
+##  Mean   : 12.74   Mean   : 257.4  
+##  3rd Qu.: 14.00   3rd Qu.: 323.0  
+##  Max.   :178.00   Max.   :2261.0  
+## </code></pre>
 
 
 </div>
