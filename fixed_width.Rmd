@@ -1,0 +1,72 @@
+---
+title: "Illustrating input of fixed width format files"
+author: "Steve Simon"
+date: "Sunday, June 12, 2016"
+output: html_document
+---
+
+You should generally use delimited format files (e.g., comma separated
+values) when they are available, as they generally read in easier and
+with less fuss. Some data files, however, are not delimited, or the
+delimiters aren't consistent. In these settings, you would have to
+read the date using a fixed width format.
+
+The first example of reading in a fixed width format comes from
+the Journal of Statistics Education dataset archive page. It is
+a salary survey of college professors conducted by the American
+Association of University Professors (AAUP).
+
+VARIABLE DESCRIPTIONS (AAUP2.DAT)
+
+Fixed column format with two data lines per school
+
+Line #1
+
+ 1 -  5   FICE (Federal ID number)
+
+ 7 - 37   College name
+
+38 - 39   State (postal code)
+
+40 - 43   Type  (I, IIA, or IIB)
+
+44 - 48   Average salary - full professors
+
+49 - 52   Average salary - associate professors
+
+53 - 56   Average salary - assistant professors
+
+57 - 60   Average salary - all ranks
+
+61 - 65   Average compensation - full professors
+
+66 - 69   Average compensation - associate professors
+
+70 - 73   Average compensation - assistant professors
+
+74 - 78   Average compensation - all ranks
+
+Line #2
+
+ 1 -  4   Number of full professors
+
+ 5 -  8   Number of associate professors
+
+ 9 - 12   Number of assistant professors
+ 
+13 - 16   Number of instructors
+
+17 - 21   Number of faculty - all ranks
+
+```{r import-from-web}
+help("read.fwf")
+ends_line1 <- c(5, 37, 39, 43, 48, 52, 56, 60, 65, 69, 73, 78)
+ends_line2 <- c(4, 8, 12, 16, 21)
+widths_line1 <- diff(c(0,ends_line1))
+widths_line2 <- diff(c(0,ends_line2))
+fn <- "http://www.amstat.org/publications/jse/datasets/aaup2.dat.txt"
+aaup <- read.fwf(fn, c(widths_line1,widths_line2), stringsAsFactors=FALSE)
+head(aaup)
+str(aaup)
+```
+
